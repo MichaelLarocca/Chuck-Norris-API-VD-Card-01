@@ -1,12 +1,20 @@
 const displayJoke = document.getElementById("display-joke");
 
 async function fetchJoke() {
-	const results = await fetch(`https://api.chucknorris.io/jokes/random`);
-	const data = await results.json();
+	const errorMessage = `"DO NOT DISTURB!" Chuck Norris is currently entertaining guests in his hotel room.`;
 
-	if (!results.ok) {
-		displayJoke.textContent = `"DO NOT DISTURB!" Chuck Norris is currently entertaining guests in his hotel room.`;
-		throw new Error("Request failed.");
+	try {
+		const results = await fetch(`https://api.chucknorris.io/jokes/random`);
+		const data = await results.json();
+
+		if (!results.ok) {
+			displayJoke.textContent = errorMessage;
+			throw new Error("Request failed.");
+		} else {
+			displayJoke.textContent = data.value;
+		}
+	} catch (err) {
+		displayJoke.textContent = errorMessage;
+		console.error(err);
 	}
-	displayJoke.textContent = data.value;
 }
