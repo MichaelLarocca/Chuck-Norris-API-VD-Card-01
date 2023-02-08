@@ -1,7 +1,7 @@
 const displayJoke = document.getElementById("display-joke");
 
 async function fetchJoke() {
-	const results = await fetch(`https://api.chucknorris.io/jokes/random/1`);
+	const results = await fetch(`https://api.chucknorris.io/jokes/random`);
 	const data = await results.json();
 
 	if (!results.ok) {
