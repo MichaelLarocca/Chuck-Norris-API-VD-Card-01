@@ -5,16 +5,16 @@ async function fetchJoke() {
 
 	try {
 		const results = await fetch(`https://api.chucknorris.io/jokes/random`);
-		const data = await results.json();
 
 		if (!results.ok) {
 			displayJoke.textContent = errorMessage;
 			throw new Error("Request failed.");
-		} else {
-			displayJoke.textContent = data.value;
 		}
-	} catch (err) {
+
+		const data = await results.json();
+		displayJoke.textContent = data.value;
+	} catch (error) {
 		displayJoke.textContent = errorMessage;
-		console.error(err);
+		console.error(error);
 	}
 }
